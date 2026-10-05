@@ -85,7 +85,7 @@ pytest test_bdd.py -v
 ## 👩‍💻 About
 
 Built by Nimesha Herath — QA Engineer with 4+ years experience.
-Currently completing MSc in Information Systems at Dublin Business School.
+MSc in Information Systems and Computing (First Class Honours), Dublin Business School.
 ISTQB Foundation certified.
 
 LinkedIn: linkedin.com/in/nimeshadev
