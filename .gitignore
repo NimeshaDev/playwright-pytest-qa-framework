@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+.env
+
+# IDE
+.idea/
+.vscode/
+
+# Test output
+test-results/
+playwright-report/
+.DS_Store
