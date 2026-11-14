@@ -77,7 +77,7 @@ GitHub Actions runs on every push and pull request:
 - **UI and BDD tests** on Chromium, Firefox and WebKit in parallel
 - On failure: a screenshot is embedded in the HTML report, and a Playwright trace is saved
 
-To see the reports, open the latest run on the [Actions page](https://github.com/NimeshaDev/playwright-pytest-qa-framework/actions) and download the `ui-report-*` or `api-report` artifact.
+**[View the latest test reports](https://nimeshadev.github.io/playwright-pytest-qa-framework/)** - published to GitHub Pages after every run on `master`.
 
 <!-- REPORT_SCREENSHOT -->
 

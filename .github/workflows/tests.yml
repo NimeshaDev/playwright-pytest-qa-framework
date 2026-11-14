@@ -69,3 +69,51 @@ jobs:
           path: |
             reports/
             test-results/
+
+  publish-report:
+    if: always() && github.event_name != 'pull_request' && github.ref_name == github.event.repository.default_branch
+    needs: [ api-tests, ui-tests ]
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - name: Download all reports
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Build report site
+        run: |
+          mkdir -p site
+          find artifacts -name '*.html' -exec cp {} site/ \;
+          RUN_URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          {
+            echo '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">'
+            echo '<meta name="viewport" content="width=device-width, initial-scale=1">'
+            echo '<title>Test Reports - Playwright + pytest QA Framework</title>'
+            echo '<style>body{font-family:system-ui,sans-serif;max-width:640px;margin:48px auto;padding:0 20px;color:#1f2328}'
+            echo 'a{color:#0969da}li{margin:8px 0}.meta{color:#59636e;font-size:14px}</style></head><body>'
+            echo '<h1>Latest test reports</h1>'
+            echo "<p class=\"meta\">Commit ${GITHUB_SHA::7} &middot; $(date -u '+%d %b %Y %H:%M UTC') &middot; <a href=\"$RUN_URL\">CI run</a></p><ul>"
+            for f in site/api-report.html site/ui-report-chromium.html site/ui-report-firefox.html site/ui-report-webkit.html; do
+              [ -f "$f" ] || continue
+              n=$(basename "$f" .html)
+              case "$n" in
+                api-report) label="API tests";;
+                ui-report-*) label="UI + BDD tests - ${n#ui-report-}";;
+              esac
+              echo "<li><a href=\"$(basename "$f")\">$label</a></li>"
+            done
+            echo '</ul><p class="meta"><a href="${{ github.server_url }}/${{ github.repository }}">Source code on GitHub</a></p></body></html>'
+          } > site/index.html
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - id: deploy
+        uses: actions/deploy-pages@v4
