@@ -1,7 +1,5 @@
 import requests
-from pygments.lexers import data
 
-headers = {"x-api-key": "free_user_34FbvlKNAwcnyunhMtw1UdCPXxt"}
 
 def test_get_user():
     response = requests.get("https://jsonplaceholder.typicode.com/users/2")
@@ -18,7 +16,7 @@ def test_user_not_found():
     print("Status Code is 404")
 
 def test_create_user():
-    response = requests.post("https://jsonplaceholder.typicode.com/users",headers=headers,
+    response = requests.post("https://jsonplaceholder.typicode.com/users",
                              json={"name": "Nimesha", "job": "QA Engineer"})
     assert response.status_code == 201
     data = response.json()

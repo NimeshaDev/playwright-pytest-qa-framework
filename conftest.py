@@ -1,21 +1,22 @@
+import json
+from pathlib import Path
+
 import pytest
-class LoginPage():
-    def __init__(self):
-        self.url = "https://saucedemo.com"
-        self.username = "standard_user"
-        self.password = "secret_sauce"
+from playwright.sync_api import sync_playwright
 
-    def check_login(self, username, password):
-        if username == self.username and password == self.password:
-            return "Logged in successfully"
-        else:
-            return "Login failed"
+DATA_FILE = Path(__file__).parent / "data" / "test_data.json"
 
-    def get_url(self):
-        return self.url
+
+@pytest.fixture(scope="session")
+def test_data():
+    with DATA_FILE.open() as f:
+        return json.load(f)
+
 
 @pytest.fixture
-def login_page():
-    page = LoginPage()
-    return page
-
+def browser_page():
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        page = browser.new_page()
+        yield page
+        browser.close()
