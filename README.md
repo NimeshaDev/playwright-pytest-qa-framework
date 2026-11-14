@@ -79,7 +79,7 @@ GitHub Actions runs on every push and pull request:
 
 **[View the latest test reports](https://nimeshadev.github.io/playwright-pytest-qa-framework/)** - published to GitHub Pages after every run on `master`.
 
-<!-- REPORT_SCREENSHOT -->
+![Test report - all UI and BDD tests passing on Chromium](docs/test-report.png)
 
 ## About
 
