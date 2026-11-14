@@ -12,4 +12,4 @@ class LoginPage:
         self.page.get_by_role("button", name="Login").click()
 
     def get_title(self):
-        return self.page.get_title()
+        return self.page.title()
