@@ -1,8 +1,8 @@
 # Playwright + pytest QA Automation Framework
 
-![Tests](../../actions/workflows/tests.yml/badge.svg)
+[![Tests](https://github.com/NimeshaDev/playwright-pytest-qa-framework/actions/workflows/tests.yml/badge.svg)](https://github.com/NimeshaDev/playwright-pytest-qa-framework/actions)
 
-UI, API and BDD test automation in Python, built with Playwright and pytest, using the Page Object Model and running in GitHub Actions on every push.
+UI, API and BDD test automation in Python, built with Playwright and pytest, using the Page Object Model. Every push runs the UI tests on Chromium, Firefox and WebKit in GitHub Actions and publishes an HTML test report.
 
 ## Tech stack
 
@@ -12,6 +12,8 @@ UI, API and BDD test automation in Python, built with Playwright and pytest, usi
 | Playwright | Browser automation |
 | pytest | Test runner and fixtures |
 | pytest-bdd | Gherkin / BDD scenarios |
+| pytest-playwright | Browser fixtures, cross-browser runs, failure screenshots and traces |
+| pytest-html | HTML test reports |
 | requests | API testing |
 | Postman | Manual API exploration |
 | GitHub Actions | CI pipeline |
@@ -63,7 +65,21 @@ playwright install chromium
 pytest                 # all tests
 pytest tests/api       # API only
 pytest tests/ui        # UI and BDD only
+pytest tests/ui --browser firefox --headed   # watch it run in Firefox
+pytest --html=reports/report.html --self-contained-html   # HTML report
 ```
+
+## CI and test reports
+
+GitHub Actions runs on every push and pull request:
+
+- **API tests** once
+- **UI and BDD tests** on Chromium, Firefox and WebKit in parallel
+- On failure: a screenshot is embedded in the HTML report, and a Playwright trace is saved
+
+To see the reports, open the latest run on the [Actions page](https://github.com/NimeshaDev/playwright-pytest-qa-framework/actions) and download the `ui-report-*` or `api-report` artifact.
+
+<!-- REPORT_SCREENSHOT -->
 
 ## About
 
