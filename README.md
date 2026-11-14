@@ -1,91 +1,72 @@
-# QA Automation Portfolio — Nimesha Herath
+# Playwright + pytest QA Automation Framework
 
-![Tests](https://github.com/NimeshaDev/python-qa-learning/actions/workflows/tests.yml/badge.svg)
+![Tests](../../actions/workflows/tests.yml/badge.svg)
 
-A professional QA automation framework built with Python, Playwright, and pytest.
-Demonstrates end-to-end browser automation, API testing, BDD/Gherkin, 
-Page Object Model, and CI/CD pipeline integration.
+UI, API and BDD test automation in Python, built with Playwright and pytest, using the Page Object Model and running in GitHub Actions on every push.
 
----
-
-## 🛠️ Tech Stack
+## Tech stack
 
 | Tool | Purpose |
 |------|---------|
-| Python | Programming language |
+| Python 3.11 | Language |
 | Playwright | Browser automation |
-| pytest | Test framework |
-| pytest-bdd | BDD / Gherkin scenarios |
+| pytest | Test runner and fixtures |
+| pytest-bdd | Gherkin / BDD scenarios |
 | requests | API testing |
-| Postman | Manual API testing |
-| GitHub Actions | CI/CD pipeline |
+| Postman | Manual API exploration |
+| GitHub Actions | CI pipeline |
 
----
+## Project structure
 
-## 📁 Project Structure
+```
+.
+├── .github/workflows/tests.yml   CI pipeline
+├── conftest.py                   Shared fixtures (browser page, test data)
+├── pytest.ini                    pytest and pytest-bdd settings
+├── requirements.txt
+├── data/test_data.json           Test users and URLs
+├── features/login.feature        Gherkin scenarios
+├── pages/                        Page Object Model classes
+│   ├── login_page.py
+│   ├── inventory_page.py
+│   └── cart_page.py
+├── postman/                      Postman collection
+└── tests/
+    ├── api/test_users_api.py     REST API tests
+    └── ui/
+        ├── test_saucedemo_pom.py UI tests (POM)
+        └── test_login_bdd.py     BDD step definitions
+```
 
-    python-qa-learning/
-    ├── .github/workflows/    ← CI/CD pipeline
-    ├── features/             ← BDD Gherkin feature files
-    ├── pages/                ← Page Object Model classes
-    │   ├── login_page.py
-    │   ├── inventory_page.py
-    │   └── cart_page.py
-    ├── test_pom.py           ← Playwright POM tests
-    ├── test_bdd.py           ← BDD scenario tests
-    ├── test_api.py           ← API tests
-    └── test_data.json        ← Test data
+## Test coverage
 
----
-
-## ✅ Test Coverage
-
-### UI Tests — saucedemo.com
-- Valid user login
-- Invalid user login
-- Locked user login
+**UI - saucedemo.com**
+- Valid, invalid and locked-out user login
 - Add product to cart
-- Complete shopping flow — login to cart
+- Full flow: login, add to cart, verify cart
 
-### API Tests — jsonplaceholder.typicode.com
-- GET single user — 200
-- GET user not found — 404
-- POST create user — 201
-- GET all users — 200
+**API - jsonplaceholder.typicode.com**
+- GET single user (200), user not found (404)
+- POST create user (201)
+- GET all users (200)
 
-### BDD Scenarios
+**BDD scenarios**
 - Valid user can login
 - Invalid user cannot login
 - Locked user cannot login
 
----
+## How to run
 
-## 🚀 How to Run
-
-**Install dependencies:**
 ```bash
-pip install pytest playwright pytest-bdd requests
-playwright install
+pip install -r requirements.txt
+playwright install chromium
+pytest                 # all tests
+pytest tests/api       # API only
+pytest tests/ui        # UI and BDD only
 ```
 
-**Run all tests:**
-```bash
-pytest -v
-```
+## About
 
-**Run specific test files:**
-```bash
-pytest test_api.py -v
-pytest test_pom.py -v
-pytest test_bdd.py -v
-```
+Built by Nimesha Herath - QA Engineer with 4+ years of experience, MSc in Information Systems and Computing (First Class Honours), ISTQB Foundation certified.
 
----
-
-## 👩‍💻 About
-
-Built by Nimesha Herath — QA Engineer with 4+ years experience.
-MSc in Information Systems and Computing (First Class Honours), Dublin Business School.
-ISTQB Foundation certified.
-
-LinkedIn: linkedin.com/in/nimeshadev
+[LinkedIn](https://www.linkedin.com/in/nimeshadev) · [Portfolio](https://nimeshadev.github.io)
