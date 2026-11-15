@@ -4,6 +4,7 @@ import platform
 from pathlib import Path
 
 import pytest
+import requests
 
 DATA_FILE = Path(__file__).parent / "data" / "test_data.json"
 
@@ -12,6 +13,18 @@ DATA_FILE = Path(__file__).parent / "data" / "test_data.json"
 def test_data():
     with DATA_FILE.open() as f:
         return json.load(f)
+
+
+@pytest.fixture(scope="session")
+def api_base_url(test_data):
+    return test_data["api_base_url"]
+
+
+@pytest.fixture(scope="session")
+def api_session():
+    with requests.Session() as session:
+        session.headers.update({"Accept": "application/json"})
+        yield session
 
 
 @pytest.fixture

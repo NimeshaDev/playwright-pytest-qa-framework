@@ -17,6 +17,7 @@ UI, API and BDD test automation in Python, built with Playwright and pytest, usi
 | pytest-playwright | Browser fixtures, cross-browser runs, failure screenshots and traces |
 | pytest-html | HTML test reports |
 | requests | API testing |
+| jsonschema | API response schema validation |
 | Postman | Manual API exploration |
 | GitHub Actions | CI pipeline |
 
@@ -45,13 +46,14 @@ UI, API and BDD test automation in Python, built with Playwright and pytest, usi
 ## Test coverage
 
 **UI - saucedemo.com**
-- Valid, invalid and locked-out user login
+- Valid, invalid and locked-out user login (one parametrised test)
 - Add product to cart
 - Full flow: login, add to cart, verify cart
 
 **API - jsonplaceholder.typicode.com**
 - GET single user (200), user not found (404)
 - POST create user (201)
+- JSON schema validation of user responses
 - GET all users (200)
 
 **BDD scenarios**
@@ -67,6 +69,7 @@ playwright install chromium
 pytest                 # all tests
 pytest tests/api       # API only
 pytest tests/ui        # UI and BDD only
+pytest -m smoke        # critical-path smoke tests (markers: ui, api, smoke)
 pytest tests/ui --browser firefox --headed   # watch it run in Firefox
 pytest --html=reports/report.html --self-contained-html   # HTML report
 ```

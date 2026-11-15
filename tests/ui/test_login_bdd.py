@@ -4,6 +4,8 @@ from pytest_bdd import given, scenarios, then, when
 from pages.inventory_page import InventoryPage
 from pages.login_page import LoginPage
 
+pytestmark = pytest.mark.ui
+
 scenarios("login.feature")
 
 

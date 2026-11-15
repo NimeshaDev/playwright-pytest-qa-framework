@@ -11,5 +11,6 @@
     "username": "locked_out_user",
     "password": "secret_sauce"
   },
-  "base_url": "https://saucedemo.com"
+  "base_url": "https://saucedemo.com",
+  "api_base_url": "https://jsonplaceholder.typicode.com"
 }

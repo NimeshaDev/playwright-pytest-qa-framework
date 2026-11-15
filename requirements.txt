@@ -4,3 +4,4 @@ pytest-playwright>=0.5
 pytest-html>=4.1
 playwright>=1.45
 requests>=2.31
+jsonschema>=4.0
