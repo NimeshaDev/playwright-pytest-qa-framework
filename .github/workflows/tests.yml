@@ -98,6 +98,8 @@ jobs:
             echo '<style>body{font-family:system-ui,sans-serif;max-width:640px;margin:48px auto;padding:0 20px;color:#1f2328}'
             echo 'a{color:#0969da}li{margin:8px 0}.meta{color:#59636e;font-size:14px}</style></head><body>'
             echo '<h1>Latest test reports</h1>'
+            echo '<p>Automated tests for the <a href="https://www.saucedemo.com">Sauce Demo</a> shop and a public REST API, written in Python with Playwright and pytest. The UI suite covers login (valid, invalid and locked-out users), adding to cart and the full login-to-cart flow, using the Page Object Model and Gherkin BDD scenarios. It runs on Chromium, Firefox and WebKit. The API suite checks status codes (200, 201, 404) and response data for GET and POST requests.</p>'
+            echo '<p>Every push to <code>master</code> runs all tests in GitHub Actions and republishes these reports.</p>'
             echo "<p class=\"meta\">Commit ${GITHUB_SHA::7} &middot; $(date -u '+%d %b %Y %H:%M UTC') &middot; <a href=\"$RUN_URL\">CI run</a></p><ul>"
             for f in site/api-report.html site/ui-report-chromium.html site/ui-report-firefox.html site/ui-report-webkit.html; do
               [ -f "$f" ] || continue

@@ -1,4 +1,6 @@
 import json
+import os
+import platform
 from pathlib import Path
 
 import pytest
@@ -16,6 +18,24 @@ def test_data():
 def browser_page(page):
     """Playwright page from pytest-playwright (browser chosen with --browser)."""
     return page
+
+
+def pytest_metadata(metadata, config):
+    """Show browser, Python and commit in the HTML report's Environment section."""
+    metadata.pop("JAVA_HOME", None)
+    metadata["Python"] = platform.python_version()
+    browsers = config.getoption("browser", default=None)
+    if browsers:
+        metadata["Browser"] = ", ".join(browsers)
+    sha = os.environ.get("GITHUB_SHA")
+    if sha:
+        metadata["Commit"] = sha[:7]
+        run_url = "{}/{}/actions/runs/{}".format(
+            os.environ.get("GITHUB_SERVER_URL", "https://github.com"),
+            os.environ.get("GITHUB_REPOSITORY", ""),
+            os.environ.get("GITHUB_RUN_ID", ""),
+        )
+        metadata["CI run"] = run_url
 
 
 def pytest_html_report_title(report):

@@ -1,6 +1,8 @@
 # Playwright + pytest QA Automation Framework
 
-[![Tests](https://github.com/NimeshaDev/playwright-pytest-qa-framework/actions/workflows/tests.yml/badge.svg)](https://github.com/NimeshaDev/playwright-pytest-qa-framework/actions)
+[![Tests](https://github.com/NimeshaDev/playwright-pytest-qa-framework/actions/workflows/tests.yml/badge.svg)](https://github.com/NimeshaDev/playwright-pytest-qa-framework/actions/workflows/tests.yml)
+
+📊 **[Live test reports](https://nimeshadev.github.io/playwright-pytest-qa-framework/)** - updated after every CI run
 
 UI, API and BDD test automation in Python, built with Playwright and pytest, using the Page Object Model. Every push runs the UI tests on Chromium, Firefox and WebKit in GitHub Actions and publishes an HTML test report.
 
